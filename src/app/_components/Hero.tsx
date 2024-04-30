@@ -1,90 +1,121 @@
 "use client";
-import React, { useState } from "react";
-import { z } from "zod";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { Button } from "../../components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../components/ui/form";
+import { Input } from "../../components/ui/input";
+import { Textarea } from "../../components/ui/textarea";
+import { useToast } from "../../components/ui/use-toast";
+import { sendMail } from "../lib/mail";
 
 const formSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  phoneNumber: z
-    .string()
-    .length(10, "Phone number must be 10 digits")
-    .regex(/^[0-9]+$/, "Phone number must contain only numbers"),
-  city: z.string().min(1, "City is required"),
+  fullname: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
+  subject: z.string().min(15, {
+    message: "Subject should be at least 15 characters",
+  }),
+  email: z.string().email({
+    message: "Invalid email address.",
+  }),
+  message: z.string().min(30, {
+    message: "Message must be at least 30 characters.",
+  }),
 });
 
-type FormData = z.infer<typeof formSchema>;
-
 export default function HeroSection() {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    phoneNumber: "",
-    city: "",
-  });
-  const [error, setError] = useState<string>("");
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-  const router = useRouter();
+  const toast = useToast(); // Initialize the toast
 
-  // const handleInputChange = (
-  //   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  // ) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: e.target.tagName === 'SELECT' ? e.target.value : value,
-  //   }));
-  // };
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const res = await sendMail({
+      name: values.fullname,
+      email: values.email,
+      subject: values.subject,
+      message: values.subject,
+      token: token,
+    });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
+    if (res) {
+      toast.toast({ title: "Mail sent successfully!" });
+    } else {
+      toast.toast({ title: "Error sending mail!" });
+    }
+
+    form.reset({
+      fullname: "",
+      subject: "",
+      email: "",
+      message: "",
     });
   }
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const form = useForm<z.infer<typeof formSchema>>({
+  //   resolver: zodResolver(formSchema),
+  //   defaultValues: {
+  //     fullname: "",
+  //     subject: "",
+  //     email: "",
+  //     message: "",
+  //   },
+  // });
 
-    // Validate the form data using zod
-    const validationResult = formSchema.safeParse(formData);
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value
+  //   });
+  // }
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
-    if (!validationResult.success) {
-      // Populate the fieldErrors state with the validation errors
-      const errors: Record<string, string> = validationResult.error.formErrors.fieldErrors.reduce(
-        (acc, error) => {
-          const fieldName = error.path[0] as string;
-          acc[fieldName] = error.message;
-          return acc;
-        },
-        {} as Record<string, string>
-      );
-      setFieldErrors(errors);
-      return;
-    }
+  //   // Validate the form data using zod
+  //   const validationResult = formSchema.safeParse(formData);
 
-    // Reset fieldErrors state
-    setFieldErrors({});
+  //   if (!validationResult.success) {
+  //     // Populate the fieldErrors state with the validation errors
+  //     const errors: Record<string, string> = validationResult.error.formErrors.fieldErrors.reduce(
+  //       (acc, error) => {
+  //         const fieldName = error.path[0] as string;
+  //         acc[fieldName] = error.message;
+  //         return acc;
+  //       },
+  //       {} as Record<string, string>
+  //     );
+  //     setFieldErrors(errors);
+  //     return;
+  //   }
 
-    try {
-      // Call the API endpoint to send email
-      await axios.post('/api/sendEmail', formData);
+  //   // Reset fieldErrors state
+  //   setFieldErrors({});
 
-      // Reset form data on successful submission
-      setFormData({
-        name: '',
-        phoneNumber: '',
-        city: '',
-      });
+  //   try {
+  //     // Call the API endpoint to send email
+  //     await axios.post('/api/sendEmail', formData);
 
-      // Redirect to a success page or show a success message
-      // router.push('/');
-      console.log('success');
-    } catch (err) {
-      console.error('Failed to submit form:', err);
-      // Handle error state
-      setError('Failed to submit form. Please try again later.');
-    }
-  };
+  //     // Reset form data on successful submission
+  //     setFormData({
+  //       name: '',
+  //       phoneNumber: '',
+  //       city: '',
+  //     });
+
+  //     // Redirect to a success page or show a success message
+  //     router.push('/success');
+  //     console.log('success');
+  //   } catch (err) {
+  //     console.error('Failed to submit form:', err);
+  //     // Handle error state
+  //     setError('Failed to submit form. Please try again later.');
+  //   }
+  // };
 
   return (
     <div className="relative bg-gradient-to-bl from-blue-100 via-transparent dark:from-blue-950 dark:via-transparent">
@@ -157,178 +188,140 @@ export default function HeroSection() {
 
           <div>
             {/* <!-- Form --> */}
-            <form onSubmit={handleSubmit}>
-              <div className="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
-                {/* <!-- Card --> */}
-                <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-lg dark:bg-neutral-900">
-                  <div className="text-center">
-                    <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
-                      Home Visit
-                    </h1>
-                    <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400">
-                      Book your home visits using simple steps
-                      <a
-                        className="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
-                        href="#"
-                      >
-                        {/* Sign in here */}
-                      </a>
-                    </p>
-                  </div>
 
-                  <div className="mt-5">
-                    {/* <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-700 dark:after:border-neutral-700" /> */}
-
-                    {/* <!-- Grid --> */}
-                    <div className="grid grid-cols-1 gap-4">
-                      {/* <!-- Input Group --> */}
-                      <div>
-                        {/* <!-- Floating Input --> */}
-                        <div className="relative">
-                          <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleInputChange}
-                            // id="hs-hero-signup-form-floating-input-first-name"
-                            className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600
-                      focus:pt-6
-                      focus:pb-2
-                      [&:not(:placeholder-shown)]:pt-6
-                      [&:not(:placeholder-shown)]:pb-2
-                      autofill:pt-6
-                      autofill:pb-2"
-                            placeholder="John"
-                          />
-                          <label
-                            // htmlFor="hs-hero-signup-form-floating-input-first-name"
-                            className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                        peer-focus:scale-90
-                        peer-focus:translate-x-0.5
-                        peer-focus:-translate-y-1.5
-                        peer-focus:text-gray-500 dark:peer-focus:text-neutral-500
-                        peer-[:not(:placeholder-shown)]:scale-90
-                        peer-[:not(:placeholder-shown)]:translate-x-0.5
-                        peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                        peer-[:not(:placeholder-shown)]:text-gray-500 dark:peer-[:not(:placeholder-shown)]:text-neutral-500 dark:text-neutral-500"
-                          >
-                            Name
-                          </label>
-                          {fieldErrors.name && <p className="text-red-500 text-sm">{fieldErrors.name}</p>}
-                        </div>
-                        {/* <!-- End Floating Input --> */}
-                      </div>
-                      {/* <!-- End Input Group --> */}
-
-                      {/* <!-- Input Group --> */}
-                      <div>
-                        {/* <!-- Floating Input --> */}
-                        <div className="relative">
-                          <input
-                            type="text"
-                            name="phoneNumber"
-                            value={formData.phoneNumber}
-                            onChange={handleInputChange}
-                            // ... (other input props)
-                            placeholder="987654321"
-                            className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600
-                      focus:pt-6
-                      focus:pb-2
-                      [&:not(:placeholder-shown)]:pt-6
-                      [&:not(:placeholder-shown)]:pb-2
-                      autofill:pt-6
-                      autofill:pb-2"
-                          />
-                          <label
-                            // htmlFor="hs-hero-signup-form-floating-input-email"
-                            className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                        peer-focus:scale-90
-                        peer-focus:translate-x-0.5
-                        peer-focus:-translate-y-1.5
-                        peer-focus:text-gray-500 dark:peer-focus:text-neutral-500
-                        peer-[:not(:placeholder-shown)]:scale-90
-                        peer-[:not(:placeholder-shown)]:translate-x-0.5
-                        peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                        peer-[:not(:placeholder-shown)]:text-gray-500 dark:peer-[:not(:placeholder-shown)]:text-neutral-500 dark:text-neutral-500"
-                          >
-                            Mobile Number
-                          </label>
-                          {fieldErrors.phoneNumber && <p className="text-red-500 text-sm">{fieldErrors.phoneNumber}</p>}
-                        </div>
-                        {/* <!-- End Floating Input --> */}
-                      </div>
-
-                      {/* <!-- Input Group --> */}
-                      <div className="relative col-span-full">
-  <div className="relative">
-    <select
-      name="city"
-      value={formData.city}
-      onChange={handleInputChange}
-      id="hs-hero-signup-form-floating-input-city"
-      className="peer p-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
-    >
-      <option value="" disabled>
-        Service Needed in
-      </option>
-      <option value="New York">Valencia</option>
-      <option value="New York">Vlkdsfjk;dzf</option>
-      <option value="New York">sdjkbfsd</option>
-      <option value="New York">zljkxnvl</option>
-      <option value="New York">svljkcnbjs</option>
-      {/* Other options... */}
-    </select>
-    <label
-      htmlFor="hs-hero-signup-form-floating-input-city"
-      className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:scale-90 peer-focus:translate-x-0.5 peer-focus:-translate-y-1.5 peer-focus:text-gray-500 dark:peer-focus:text-neutral-500 peer-[:not(:placeholder-shown)]:scale-90 peer-[:not(:placeholder-shown)]:translate-x-0.5 peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-gray-500 dark:peer-[:not(:placeholder-shown)]:text-neutral-500 dark:text-neutral-500"
-    >
-      City
-    </label>
-    {fieldErrors.city && <p className="text-red-500 text-sm">{fieldErrors.city}</p>}
-  </div>
-</div>
-                    </div>
-
-                    <div className="mt-5 flex items-center">
-                      <div className="flex">
-                        <input
-                          id="remember-me"
-                          name="remember-me"
-                          type="checkbox"
-                          className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                        />
-                      </div>
-                      <div className="ms-3">
-                        <label
-                          htmlFor="remember-me"
-                          className="text-sm dark:text-white"
-                        >
-                          *I authorize Physiohomefit representative to contact
-                          me. I understand that this will override the DND
-                          status on my mobile number.
-                          <a
-                            className="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
-                            href="#"
-                          ></a>
-                        </label>
-                      </div>
-                    </div>
-                    {/* <!-- End Checkbox --> */}
-
-                    <div className="mt-5">
-                      {error && <p>{error}</p>}
-                      <button
-                        type="submit"
-                        className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                      >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
+            <div className="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
+              {/* <!-- Card --> */}
+              <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-lg dark:bg-neutral-900">
+                <div className="text-center">
+                  <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
+                    Home Visit
+                  </h1>
+                  <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400">
+                    Book your home visits using simple steps
+                    <a
+                      className="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
+                      href="#"
+                    >
+                      {/* Sign in here */}
+                    </a>
+                  </p>
                 </div>
-                {/* <!-- End Card --> */}
+
+                <div className="mt-5">
+                  {/* <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-700 dark:after:border-neutral-700" /> */}
+
+                  {/* <!-- Grid --> */}
+                  <div className="grid grid-cols-1 gap-4">
+                    {/* <!-- Input Group --> */}
+                    <Form {...form}>
+                      <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="mt-5"
+                      >
+                        <FormField
+                          control={form.control}
+                          name="fullname"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Full Name</FormLabel>
+                              <FormControl>
+                                <Input placeholder="your name" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Email</FormLabel>
+                              <FormControl>
+                                <Input
+                                  placeholder="your.email@example.com"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="subject"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Subject</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Subject" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="message"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Message</FormLabel>
+                              <FormControl>
+                                <Textarea
+                                  placeholder="Your message..."
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <div className="mt-5">
+                          <Button
+                            type="submit"
+                            className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                          >
+                            Book Now
+                          </Button>
+                        </div>
+                      </form>
+                    </Form>
+                  </div>
+
+                  {/* <div className="mt-5 flex items-center">
+                    <div className="flex">
+                      <input
+                        id="remember-me"
+                        name="remember-me"
+                        type="checkbox"
+                        className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                      />
+                    </div>
+                    <div className="ms-3">
+                      <label
+                        htmlFor="remember-me"
+                        className="text-sm dark:text-white"
+                      >
+                        *I authorize Physiohomefit representative to contact me.
+                        I understand that this will override the DND status on
+                        my mobile number.
+                        <a
+                          className="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
+                          href="#"
+                        ></a>
+                      </label>
+                    </div>
+                  </div> */}
+                  {/* <!-- End Checkbox --> */}
+                </div>
               </div>
-            </form>
+              {/* <!-- End Card --> */}
+            </div>
+
             {/* <!-- End Form --> */}
           </div>
           {/* <!-- End Col --> */}
@@ -338,9 +331,6 @@ export default function HeroSection() {
     </div>
   );
 }
-
-
-
 
 // "use client";
 // import React, { useState } from "react";
@@ -380,10 +370,10 @@ export default function HeroSection() {
 //   };
 //   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 //     e.preventDefault();
-  
+
 //     // Validate the form data using zod
 //     const validationResult = formSchema.safeParse(formData);
-  
+
 //     if (!validationResult.success) {
 //       // Populate the fieldErrors state with the validation errors
 //       const errors: Record<string, string> = validationResult.error.formErrors.fieldErrors.reduce(
@@ -397,21 +387,21 @@ export default function HeroSection() {
 //       setFieldErrors(errors);
 //       return;
 //     }
-  
+
 //     // Reset fieldErrors state
 //     setFieldErrors({});
-  
+
 //     try {
 //       // Call the API endpoint to send email
 //       await axios.post('/api/sendEmail', formData);
-  
+
 //       // Reset form data on successful submission
 //       setFormData({
 //         name: '',
 //         phoneNumber: '',
 //         city: '',
 //       });
-  
+
 //       // Redirect to a success page or show a success message
 //       // router.push('/');
 //       console.log('success');
