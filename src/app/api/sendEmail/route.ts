@@ -69,11 +69,11 @@ const sendEmail = async (formData) => {
   const message = {
     from: 'ahmadmidlaj313@gmail.com',
     to: 'ahmadmidlaj313@gmail.com',
-    subject: 'New Form Submission',
+    subject: 'New Booking For Home Visit',
     text: `
       Name: ${formData.name}
       Phone Number: ${formData.phoneNumber}
-      City: ${formData.city}
+      City: ${formData.cities}
     `,
   };
 

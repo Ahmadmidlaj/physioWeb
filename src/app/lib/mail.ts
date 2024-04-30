@@ -1,19 +1,20 @@
 const ENDPOINT = "api/sendEmail";
 
-export interface Mail {
+interface Mail {
   name: string;
-  email: string;
-  subject: string;
-  message: string;
+  phoneNumber?: string;
+  cities: "City1" | "City2" | "City3";
   token: string;
 }
 
 export async function sendMail(mail: Mail) {
   const body = JSON.stringify({
     name: mail.name,
-    email: mail.email,
-    subject: mail.subject,
-    message: mail.message,
+    // email: mail.email,
+    // subject: mail.subject,
+    // message: mail.message,
+    phoneNumber: mail.phoneNumber,
+    cities: mail.cities,
   });
 
   try {

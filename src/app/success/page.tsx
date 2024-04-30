@@ -1,9 +1,9 @@
-import Navbar from "../components/Navbar"
+// import Navbar from "../components/Navbar"
 
 export default function Success(){
     return(
         <div>
-            <Navbar/>
+            {/* <Navbar/> */}
             <div className="max-w-[50rem] flex flex-col mx-auto size-full">
 
   {/* <header className="mb-auto flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full text-sm py-4">
