@@ -43,9 +43,12 @@ const formSchema = z.object({
     .refine((val) => val.trim() !== "", {
       message: "Phone number is required",
     }),
-  cities: z
-    .enum(["City1", "City2", "City3"])
-    .default("City1")
+    cities: z
+    .union([
+      z.literal("City1"),
+      z.literal("City2"),
+      z.literal("City3"),
+    ])
     .refine((val) => val !== "", {
       message: "Please select a city",
     }),
@@ -56,10 +59,9 @@ export function HeroSection({ token }: { token: string }) {
     defaultValues: {
       Name: "",
       phoneNumber: null,
-      cities: undefined,
+      cities: "", // Change this line
     },
   });
-
   const toast = useToast();
   const router = useRouter();
 
@@ -113,7 +115,7 @@ export function HeroSection({ token }: { token: string }) {
               <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-lg dark:bg-neutral-900">
                 <div className="text-center">
                   <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
-                    Home Visit
+                    Book Your Home Visit
                   </h1>
                   <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400">
                     Book your home visits using simple steps
@@ -155,33 +157,30 @@ export function HeroSection({ token }: { token: string }) {
                             </FormItem>
                           )}
                         />
-                        <FormField
-                          control={form.control}
-                          name="cities"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Cities</FormLabel>
-                              <FormControl>
-                                <select
-                                  className="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
-                                  placeholder="Select a city"
-                                  {...field}
-                                  value={field.value || ""}
-                                  onChange={(event) =>
-                                    field.onChange(event.target.value)
-                                  }
-                                >
-                                  <option value="">Select a city</option>
-                                  <option value="City1">City1</option>
-                                  <option value="City2">City2</option>
-                                  <option value="City3">City3</option>
-                                </select>
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
+                   <FormField
+  control={form.control}
+  name="cities"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Cities</FormLabel>
+      <FormControl>
+        <select
+          className="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
+          placeholder="Select a city"
+          {...field}
+          value={field.value} // Remove || ""
+          onChange={(event) => field.onChange(event.target.value)}
+        >
+          <option value="">Select a city</option>
+          <option value="City1">City1</option>
+          <option value="City2">City2</option>
+          <option value="City3">City3</option>
+        </select>
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
                         <div className="mt-5">
                           <Button
                             type="submit"
