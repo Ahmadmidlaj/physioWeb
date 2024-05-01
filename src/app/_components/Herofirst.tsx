@@ -10,82 +10,32 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../components/ui/dialog";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../../components/ui/form";
-import { Input } from "../../components/ui/input";
-import { Label } from "../../components/ui/label";
+import { FC } from "react";
+import { sendEmail } from "../../../utils/send-email";
 import { useForm } from "react-hook-form";
-import { useToast } from "../../components/ui/use-toast";
-import { sendMail } from "../lib/mail";
+
 import { useRouter } from "next/navigation";
 
-interface Mail {
+export type FormData = {
   name: string;
-  phoneNumber?: string;
-  cities: "City1" | "City2" | "City3";
-  token: string;
-}
+  city: string;
 
-const formSchema = z.object({
-  Name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  phoneNumber: z
-    .string()
-    .regex(/^\d{10}$/, {
-      message: "Phone number must be 10 digits",
-    })
-    .refine((val) => val.trim() !== "", {
-      message: "Phone number is required",
-    }),
-  cities: z
-    .enum(["City1", "City2", "City3"])
-    .default("City1")
-    .refine((val) => val !== "", {
-      message: "Please select a city",
-    }),
-});
-export default function Herofirst({ token }: { token: string }) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      Name: "",
-      phoneNumber: null,
-      cities: undefined,
-    },
-  });
+  phonenumber: number;
+};
 
-  const toast = useToast();
+export default function Herofirst() {
   const router = useRouter();
+  const { register, handleSubmit } = useForm<FormData>();
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (form.formState.isValid) {
-      const res = await sendMail({
-        name: values.Name,
-        phoneNumber: values.phoneNumber,
-        cities: values.cities,
-        token: token,
-      });
-
-      if (res) {
-        toast.toast({ title: "Mail sent successfully!" });
-        router.push("/success");
-      } else {
-        toast.toast({ title: "Error sending mail!" });
-      }
-
-      form.reset();
+  async function onSubmit(data: FormData) {
+    try {
+      await sendEmail(data);
+      router.push("/success"); // Navigate to the /success route upon successful submission
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle error if sending email fails
     }
-  };
-
+  }
   return (
     <div>
       {/* <!-- Hero --> */}
@@ -129,84 +79,81 @@ export default function Herofirst({ token }: { token: string }) {
                 <DialogContent className="sm:max-w-[425px]">
                   <DialogTitle>Book Your Home Visit</DialogTitle>
 
-                  <Form {...form}>
-                    <form
-                      onSubmit={form.handleSubmit(onSubmit)}
-                      className="mt-5"
-                    >
-                      <FormField
-                        control={form.control}
-                        name="Name"
-                        cas
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Full Name</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="your name"
-                                className="text-black"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                  <div>
+                    <div className="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
+                      <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-lg dark:bg-neutral-900">
+                        {/* <div className="text-center">
+                          <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
+                            Book Your Home Visit
+                          </h1>
+                          <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400">
+                            Book your home visits using simple steps
+                          </p>
+                        </div> */}
 
-                      <FormField
-                        control={form.control}
-                        name="phoneNumber"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Phone Number</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="987654321"
-                                className="text-black"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="cities"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Cities</FormLabel>
-                            <FormControl>
-                              <select
-                                className="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-black"
-                                placeholder="Select a city"
-                                {...field}
-                                value={field.value || ""}
-                                onChange={(event) =>
-                                  field.onChange(event.target.value)
-                                }
-                              >
-                                <option value="">Select a city</option>
-                                <option value="City1">City1</option>
-                                <option value="City2">City2</option>
-                                <option value="City3">City3</option>
-                              </select>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                        <div className="mt-5">
+                          <div className="grid grid-cols-1 gap-4">
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                              <div className="mb-5">
+                                <label
+                                  htmlFor="name"
+                                  className="mb-3 block text-base font-medium text-black"
+                                >
+                                  Full Name
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="Full Name"
+                                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md"
+                                  {...register("name", { required: true })}
+                                />
+                              </div>
 
-                      <div className="mt-5">
-                        <Button
-                          type="submit"
-                          className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                        >
-                          Book Now
-                        </Button>
+                              <div className="mb-5">
+                                <label
+                                  htmlFor="phonenumber"
+                                  className="mb-3 block text-base font-medium text-black"
+                                >
+                                  Phone Number
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="123456789"
+                                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md"
+                                  {...register("phonenumber", {
+                                    required: true,
+                                  })}
+                                />
+                              </div>
+                              <div className="mb-5">
+                                <label
+                                  htmlFor="city"
+                                  className="mb-3 block text-base font-medium text-black"
+                                >
+                                  Select City
+                                </label>
+                                <select
+                                  id="city"
+                                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md"
+                                  {...register("city", { required: true })}
+                                >
+                                  <option value="">Select a city</option>
+                                  <option value="city1">City 1</option>
+                                  <option value="city2">City 2</option>
+                                  <option value="city3">City 3</option>
+                                </select>
+                              </div>
+                              <div>
+                                <button className="hover:shadow-form rounded-md bg-purple-500 py-3 px-8 text-base font-semibold text-white outline-none">
+                                  Submit
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
                       </div>
-                    </form>
-                  </Form>
+                    </div>
+                  </div>
                 </DialogContent>
               </Dialog>
             </div>
