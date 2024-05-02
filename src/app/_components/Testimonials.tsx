@@ -22,7 +22,7 @@ export default function Testimonials() {
                     " I couldnt believe the convenience and professionalism of
                     PhysioCare at Home! Their therapist came right to my door
                     and provided top-notch treatment that helped me recover from
-                    a sports injury in no time. Highly recommended"
+                    a sports injury in no time. Highly recommended "
                   </p>
                 </div>
 
@@ -59,7 +59,7 @@ export default function Testimonials() {
                     physiotherapy, but this service changed my mind completely!
                     The therapist was incredibly knowledgeable and tailored the
                     exercises to my needs. My recovery progress skyrocketed
-                    thanks to their expertise!"
+                    thanks to their expertise"
                   </p>
                 </div>
 
