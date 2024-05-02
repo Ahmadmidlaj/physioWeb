@@ -19,7 +19,7 @@ export default function Testimonials(){
         <div className="flex flex-col bg-white rounded-xl dark:bg-neutral-900">
           <div className="flex-auto p-4 md:p-6">
             <p className="text-base italic md:text-lg text-gray-800 dark:text-neutral-200">
-              " With Preline, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience. "
+              " With Preline, were able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience. "
             </p>
           </div>
 
