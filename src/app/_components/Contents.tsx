@@ -1,5 +1,9 @@
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
-import Image from "next/image"
+import {
+  CloudArrowUpIcon,
+  LockClosedIcon,
+  ServerIcon,
+} from "@heroicons/react/20/solid";
+import Image from "next/image";
 export default function Contents() {
   return (
     <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
@@ -26,80 +30,144 @@ export default function Contents() {
               strokeWidth={0}
             />
           </svg>
-          <rect width="100%" height="100%" strokeWidth={0} fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)" />
+          <rect
+            width="100%"
+            height="100%"
+            strokeWidth={0}
+            fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)"
+          />
         </svg>
       </div>
       <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
         <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
           <div className="lg:pr-4">
             <div className="lg:max-w-lg">
-              <p className="text-base font-semibold leading-7 text-indigo-600">Deploy faster</p>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">A better workflow</h1>
+              <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                What is physiotherapy?
+              </h1>
               <p className="mt-6 text-xl leading-8 text-gray-700">
-                Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam
-                eget aliquam. Quisque id at vitae feugiat egestas.
+                Physiotherapy, also referred to as physical therapy, is an
+                allied health profession that makes use of bio-mechanics or
+                kinesiology, manual therapy, exercise therapy, and
+                electrotherapy, to help patients restore, maintain and increase
+                their physical mobility, strength, and function.
               </p>
             </div>
           </div>
         </div>
         <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
-          <img
-          
+          {/* <img
             className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
             src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
             alt=""
-            
+          /> */}
+          <Image
+            src="/image/physio.jpg" // path to your image file
+            alt="physio"
+            width={700} // desired width of the image
+            height={700} // desired height of the image
+          />
+          <Image
+            src="/image/pysio2.jpg" // path to your image file
+            alt="physio"
+            width={600} // desired width of the image
+            height={300} // desired height of the image
           />
         </div>
         <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
           <div className="lg:pr-4">
             <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
-              <p>
-                Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet
-                vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque
-                erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris
-                semper sed amet vitae sed turpis id.
-              </p>
+              {/* <p>
+                Physiotherapists are better able to help patients regain
+                mobility, as they have a better understanding of how the body
+                works and are trained in clinical skills to assess, diagnose and
+                treat disabilities. Physiotherapists can help patients recover
+                from injuries and disabilities ranging from back pain, neck
+                pain, knee pain to ligament issues.
+              </p> */}
+              <div className="mt-3">
+                <h2 className="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                  What Are The Benefits Of Physiotherapy Services At Home?
+                </h2>
+              </div>
               <ul role="list" className="mt-8 space-y-8 text-gray-600">
                 <li className="flex gap-x-3">
-                  <CloudArrowUpIcon className="mt-1 h-5 w-5 flex-none text-indigo-600" aria-hidden="true" />
+                  <ServerIcon
+                    className="mt-1 h-5 w-5 flex-none text-indigo-600"
+                    aria-hidden="true"
+                  />
                   <span>
-                    <strong className="font-semibold text-gray-900">Push to deploy.</strong> Lorem ipsum, dolor sit amet
-                    consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate
-                    blanditiis ratione.
+                    <strong className="font-semibold text-gray-900">
+                      Convenience:
+                    </strong>{" "}
+                    Receive professional care without leaving your home, making
+                    it easier to integrate therapy into your daily routine.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
-                  <LockClosedIcon className="mt-1 h-5 w-5 flex-none text-indigo-600" aria-hidden="true" />
+                  <ServerIcon
+                    className="mt-1 h-5 w-5 flex-none text-indigo-600"
+                    aria-hidden="true"
+                  />
                   <span>
-                    <strong className="font-semibold text-gray-900">SSL certificates.</strong> Anim aute id magna aliqua
-                    ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+                    <strong className="font-semibold text-gray-900">
+                      Personalized Care:
+                    </strong>{" "}
+                    Tailored treatment plans that address your specific
+                    rehabilitation needs, enhancing the effectiveness of each
+                    session.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
-                  <ServerIcon className="mt-1 h-5 w-5 flex-none text-indigo-600" aria-hidden="true" />
+                  <ServerIcon
+                    className="mt-1 h-5 w-5 flex-none text-indigo-600"
+                    aria-hidden="true"
+                  />
                   <span>
-                    <strong className="font-semibold text-gray-900">Database backups.</strong> Ac tincidunt sapien
-                    vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.
+                    <strong className="font-semibold text-gray-900">
+                      Cost-Effective:
+                    </strong>{" "}
+                    Save on travel expenses and receive affordable treatment
+                    plans without compromising on quality.
+                  </span>
+                </li>
+                <li className="flex gap-x-3">
+                  <ServerIcon
+                    className="mt-1 h-5 w-5 flex-none text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    <strong className="font-semibold text-gray-900">
+                      Faster Healing Process:
+                    </strong>{" "}
+                    The comfort and familiarity of your home environment can
+                    facilitate a quicker recovery.
                   </span>
                 </li>
               </ul>
               <p className="mt-8">
-                Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis odio id et. Id blandit molestie auctor
-                fermentum dignissim. Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate et ultrices hac
-                adipiscing egestas. Iaculis convallis ac tempor et ut. Ac lorem vel integer orci.
+                Our affordable and reliable home services are designed to
+                eliminate the stress and inconvenience typically associated with
+                traditional physiotherapy treatment. Say goodbye to the
+                challenges of receiving effective therapy; with our at-home
+                services, we bring the path to recovery directly to you.
               </p>
-              <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">No server? No problem.</h2>
+              <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
+                When Do You Need A Physiotherapist From Us?
+              </h2>
               <p className="mt-6">
-                Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in. Convallis arcu ipsum urna nibh.
-                Pharetra, euismod vitae interdum mauris enim, consequat vulputate nibh. Maecenas pellentesque id sed
-                tellus mauris, ultrices mauris. Tincidunt enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam
-                turpis ipsum eu a sed convallis diam.
+                Call it the bane of the modern lifestyle but knee pain, back
+                pain, and neck strain have become a part and parcel of life.
+                When a certain type of pain does not subdue over a period of
+                time and you experience it after doing a particular movement,
+                then it is better to see a physiotherapist or get the service of
+                a physiotherapist at home. You can also benefit from our home
+                physiotherapy service for a convenient treatment.
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -32,7 +32,7 @@ const HeroSection: FC = () => {
         <div className="grid items-center md:grid-cols-2 gap-8 lg:gap-12">
           <div>
             <p className="inline-block text-sm font-medium bg-clip-text bg-gradient-to-l from-blue-600 to-violet-500 text-transparent dark:from-blue-400 dark:to-violet-400">
-              Preline: A vision for 2024
+              
             </p>
 
             <div className="mt-4 md:mb-12 max-w-2xl">
@@ -40,9 +40,9 @@ const HeroSection: FC = () => {
                 Physio-Home-FIt
               </h1>
               <p className="text-gray-600 dark:text-neutral-400">
-                We provide you with a test account that can be set up in
-                seconds. Our main focus is getting responses to you as soon as
-                we can.
+                Get expert physiotherapy treatment in the comfort of your home.
+                Our qualified physiotherapists provide personalized care and
+                rehabilitation services at your doorstep
               </p>
             </div>
 
@@ -113,9 +113,9 @@ const HeroSection: FC = () => {
                           <option value="city3">City 3</option>
                         </select>
                       </div>
-                      <div>
+                      <div className="flex justify-center">
                         <button className="hover:shadow-form rounded-md bg-purple-500 py-3 px-8 text-base font-semibold text-white outline-none">
-                          Submit
+                          Book Now
                         </button>
                       </div>
                     </form>
