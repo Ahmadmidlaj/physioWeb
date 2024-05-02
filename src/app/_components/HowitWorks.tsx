@@ -8,7 +8,7 @@ export default function HowitWorks() {
           src="flaro-assets/images/how-it-works/gradient2.svg"
           alt=""
         /> */}
-        <div className="relative z-10 container px-4 mx-auto">
+        <div id="howitworks" className="relative z-10 container px-4 mx-auto">
           <p className="mb-6 text-lg text-indigo-600 text-center font-semibold uppercase tracking-px">
             Physiotherapy Home visits
           </p>
