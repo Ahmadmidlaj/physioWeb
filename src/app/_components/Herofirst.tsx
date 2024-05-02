@@ -19,7 +19,6 @@ import { useRouter } from "next/navigation";
 export type FormData = {
   name: string;
   city: string;
-
   phonenumber: number;
 };
 
@@ -42,11 +41,11 @@ export default function Herofirst() {
       <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
         {/* <!-- Grid --> */}
         <div className="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
-          <div>
+          <div className="mt-5">
             <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">
-              Expert Physiotherapy care{" "}
+            Physio Home Fit {" "} <br />
               <span className="text-blue-600">
-                in the Comfort of Your Home{" "}
+              Expert Physiotherapy care{" "} at your doorstep
               </span>
             </h1>
             <p className="mt-3 text-lg text-gray-800 dark:text-neutral-400">
