@@ -13,9 +13,9 @@ import {
 import { FC } from "react";
 import { sendEmail } from "../../../utils/send-email";
 import { useForm } from "react-hook-form";
-
+import { Lottie } from "@/hooks/Lottie";
 import { useRouter } from "next/navigation";
-
+import Image from "next/image";
 export type FormData = {
   name: string;
   city: string;
@@ -43,9 +43,9 @@ export default function Herofirst() {
         <div className="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
           <div className="mt-5">
             <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">
-            Physio Home Fit {" "} <br />
+              Physio Home Fit <br />
               <span className="text-blue-600">
-              Expert Physiotherapy care{" "} at your doorstep
+                Expert Physiotherapy care at your doorstep
               </span>
             </h1>
             <p className="mt-3 text-lg text-gray-800 dark:text-neutral-400">
@@ -96,7 +96,7 @@ export default function Herofirst() {
                               <div className="mb-5">
                                 <label
                                   htmlFor="name"
-                                  className="mb-3 block text-base font-medium text-black"
+                                  className="mb-3 block text-base font-medium text-gray-500"
                                 >
                                   Full Name
                                 </label>
@@ -111,7 +111,7 @@ export default function Herofirst() {
                               <div className="mb-5">
                                 <label
                                   htmlFor="phonenumber"
-                                  className="mb-3 block text-base font-medium text-black"
+                                  className="mb-3 block text-base font-medium text-gray-500"
                                 >
                                   Phone Number
                                 </label>
@@ -127,7 +127,7 @@ export default function Herofirst() {
                               <div className="mb-5">
                                 <label
                                   htmlFor="city"
-                                  className="mb-3 block text-base font-medium text-black"
+                                  className="mb-3 block text-base font-medium text-gray-500"
                                 >
                                   Select City
                                 </label>
@@ -136,10 +136,35 @@ export default function Herofirst() {
                                   className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md"
                                   {...register("city", { required: true })}
                                 >
+                                 
                                   <option value="">Select a city</option>
-                                  <option value="city1">City 1</option>
-                                  <option value="city2">City 2</option>
-                                  <option value="city3">City 3</option>
+                                  <option value="Kankanady">Kankanady</option>
+                                  <option value="Hampankatta">
+                                    Hampankatta
+                                  </option>
+                                  <option value="Falnir">Falnir</option>
+                                  <option value="Jeppu">Jeppu</option>
+                                  <option value="StateBank">StateBank</option>
+                                  <option value="Kavoor">Kavoor</option>
+                                  <option value="Marnamikatta">
+                                    Marnamikatta
+                                  </option>
+                                  <option value="Pandeshwar">Pandeshwar</option>
+                                  <option value="ShakthiNagar">
+                                    ShakthiNagar
+                                  </option>
+                                  <option value="Padil">Padil</option>
+                                  <option value="Bikarnakatte">
+                                    Bikarnakatte
+                                  </option>
+                                  <option value="Nanthoor">Nanthoor</option>
+                                  <option value="KPT">KPT</option>
+                                  <option value="Kadri">Kadri</option>
+                                  <option value="BuntsHostel">
+                                    BuntsHostel
+                                  </option>
+                                  <option value="Pumpwell">Pumpwell</option>
+                                  <option value="Jyothi">Jyothi</option>
                                 </select>
                               </div>
                               <div>
@@ -165,11 +190,25 @@ export default function Herofirst() {
           {/* <!-- End Col --> */}
 
           <div className="relative ms-4">
-            <img
-              className="w-full rounded-md"
+            {/* <img
+           className="w-full rounded-md"
               src="https://images.unsplash.com/photo-1665686377065-08ba896d16fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&h=800&q=80"
               alt="Image Description"
+            /> */}
+            {/* <Image
+             className="w-full rounded-md"
+            src="https://images.unsplash.com/photo-1665686377065-08ba896d16fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&h=800&q=80"
+            width={700}
+            height={800}
+            alt="hero image"
+            /> */}
+            <Lottie
+              src={
+                // "https://lottie.host/d275ed70-8cce-446a-9522-681a5c4e4fbb/WMNyLoc54D.json"
+                " https://lottie.host/30f1bd96-0240-4af3-a1bf-7e8945128f4a/Z80Hye68ld.json"
+              }
             />
+
             <div className="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 size-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-neutral-800 dark:via-neutral-900/0 dark:to-neutral-900/0"></div>
 
             {/* <!-- SVG--> */}

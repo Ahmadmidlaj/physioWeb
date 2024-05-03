@@ -19,10 +19,10 @@ export default function Testimonials() {
               <div className="flex flex-col bg-white rounded-xl dark:bg-neutral-900">
                 <div className="flex-auto p-4 md:p-6">
                   <p className="text-base italic md:text-lg text-gray-800 dark:text-neutral-200">
-                    " I couldnt believe the convenience and professionalism of
+                    I couldnt believe the convenience and professionalism of
                     PhysioCare at Home! Their therapist came right to my door
                     and provided top-notch treatment that helped me recover from
-                    a sports injury in no time. Highly recommended"
+                    a sports injury in no time. Highly recommended 
                   </p>
                 </div>
 
@@ -55,11 +55,11 @@ export default function Testimonials() {
               <div className="flex flex-col bg-white rounded-xl dark:bg-neutral-900">
                 <div className="flex-auto p-4 md:p-6">
                   <p className="text-base italic md:text-lg text-gray-800 dark:text-neutral-200">
-                    "After my accident, I was hesitant about home care
-                    physiotherapy, but this service changed my mind completely!
+                    After my accident I was hesitant about home care
+                    physiotherapy but this service changed my mind completely!
                     The therapist was incredibly knowledgeable and tailored the
                     exercises to my needs. My recovery progress skyrocketed
-                    thanks to their expertise!"
+                    thanks to their expertise!{" "}
                   </p>
                 </div>
 
@@ -92,12 +92,12 @@ export default function Testimonials() {
               <div className="flex flex-col bg-white rounded-xl dark:bg-neutral-900">
                 <div className="flex-auto p-4 md:p-6">
                   <p className="text-base italic md:text-lg text-gray-800 dark:text-neutral-200">
-                    "As a busy professional, I didnt have time to schedule
+                    As a busy professional, I didnt have time to schedule
                     regular physiotherapy appointments. Thankfully, I discovered
-                    this home care service, and it's been a lifesaver! The
+                    this home care service, and its been a lifesaver! The
                     therapist comes to my home at a time that suits me, and I ve
                     seen significant improvement in my mobility and
-                    flexibility."
+                    flexibility
                   </p>
                 </div>
 
