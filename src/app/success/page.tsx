@@ -4,7 +4,7 @@ export default function Success() {
   return (
     <div>
       <Navbar/>
-      <div className="max-w-[50rem] flex flex-col mx-auto my-auto mt-20 size-full items-center justify-center h-screen">
+      <div className="max-w-[50rem] flex flex-col mx-auto my-auto  size-full items-center justify-center h-screen bg-black">
         {/* <header className="mb-auto flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full text-sm py-4">
     <nav className="w-full px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
       <div className="flex items-center justify-between">
@@ -28,11 +28,11 @@ export default function Success() {
   </header> */}
 
  
-          <div className="text-center py-10 px-4 sm:px-6 lg:px-8">
+          <div className="text-center py-10 px-4 sm:px-6 lg:px-8 ">
             <h1 className="block text-2xl font-bold text-white sm:text-6xl">
               Thank You
             </h1>
-            <p className="mt-3 text-3xl text-gray-300 dark:text-neutral-400">
+            <p className="mt-3 text-3xl text-gray-300 dark:text-neutral-400 ">
               We will call you shortly. Thank you for trusting us with your
               health!
             </p>

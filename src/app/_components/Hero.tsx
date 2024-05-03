@@ -27,13 +27,14 @@ const HeroSection: FC = () => {
   }
 
   return (
-    <div id="booking" className="relative bg-gradient-to-bl from-blue-100 via-transparent dark:from-blue-950 dark:via-transparent">
+    <div
+      id="booking"
+      className="relative bg-gradient-to-bl from-blue-100 via-transparent dark:from-blue-950 dark:via-transparent"
+    >
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="grid items-center md:grid-cols-2 gap-8 lg:gap-12">
           <div>
-            <p className="inline-block text-sm font-medium bg-clip-text bg-gradient-to-l from-blue-600 to-violet-500 text-transparent dark:from-blue-400 dark:to-violet-400">
-              
-            </p>
+            <p className="inline-block text-sm font-medium bg-clip-text bg-gradient-to-l from-blue-600 to-violet-500 text-transparent dark:from-blue-400 dark:to-violet-400"></p>
 
             <div className="mt-4 md:mb-12 max-w-2xl">
               <h1 className="mb-4 font-semibold text-gray-800 text-4xl lg:text-5xl dark:text-neutral-200">
@@ -69,7 +70,7 @@ const HeroSection: FC = () => {
                       <div className="mb-5">
                         <label
                           htmlFor="name"
-                          className="mb-3 block text-base font-medium text-black"
+                          className="mb-3 block text-base font-medium text-gray-500"
                         >
                           Full Name
                         </label>
@@ -84,7 +85,7 @@ const HeroSection: FC = () => {
                       <div className="mb-5">
                         <label
                           htmlFor="phonenumber"
-                          className="mb-3 block text-base font-medium text-black"
+                          className="mb-3 block text-base font-medium text-gray-500"
                         >
                           Phone Number
                         </label>
@@ -98,7 +99,7 @@ const HeroSection: FC = () => {
                       <div className="mb-5">
                         <label
                           htmlFor="city"
-                          className="mb-3 block text-base font-medium text-black"
+                          className="mb-3 block text-base font-medium text-gray-500"
                         >
                           Select City
                         </label>
@@ -108,9 +109,23 @@ const HeroSection: FC = () => {
                           {...register("city", { required: true })}
                         >
                           <option value="">Select a city</option>
-                          <option value="city1">City 1</option>
-                          <option value="city2">City 2</option>
-                          <option value="city3">City 3</option>
+                          <option value="Kankanady">Kankanady</option>
+                          <option value="Hampankatta">Hampankatta</option>
+                          <option value="Falnir">Falnir</option>
+                          <option value="Jeppu">Jeppu</option>
+                          <option value="StateBank">StateBank</option>
+                          <option value="Kavoor">Kavoor</option>
+                          <option value="Marnamikatta">Marnamikatta</option>
+                          <option value="Pandeshwar">Pandeshwar</option>
+                          <option value="ShakthiNagar">ShakthiNagar</option>
+                          <option value="Padil">Padil</option>
+                          <option value="Bikarnakatte">Bikarnakatte</option>
+                          <option value="Nanthoor">Nanthoor</option>
+                          <option value="KPT">KPT</option>
+                          <option value="Kadri">Kadri</option>
+                          <option value="BuntsHostel">BuntsHostel</option>
+                          <option value="Pumpwell">Pumpwell</option>
+                          <option value="Jyothi">Jyothi</option>
                         </select>
                       </div>
                       <div className="flex justify-center">
