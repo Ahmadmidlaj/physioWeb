@@ -208,6 +208,13 @@ export default function Herofirst() {
                 " https://lottie.host/30f1bd96-0240-4af3-a1bf-7e8945128f4a/Z80Hye68ld.json"
               }
             />
+            {/* <Image
+          src="/image/herophysio.jpeg"
+          className="w-full rounded-md"
+          height='500'
+          width='500'
+          alt="heroo"
+            /> */}
 
             <div className="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 size-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-neutral-800 dark:via-neutral-900/0 dark:to-neutral-900/0"></div>
 

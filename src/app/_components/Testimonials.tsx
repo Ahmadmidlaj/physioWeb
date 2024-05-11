@@ -38,7 +38,7 @@ export default function Testimonials() {
 
                     <div className="grow ms-3">
                       <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-neutral-200">
-                        Joyal David
+                        Nooruddin
                       </p>
                       <p className="text-xs text-gray-500 dark:text-neutral-400">
                         {/* Product Manager | Capsule */}
@@ -113,7 +113,7 @@ export default function Testimonials() {
 
                     <div className="grow ms-3">
                       <p className="text-sm sm:text-base font-semibold text-gray-800 dark:text-neutral-200">
-                        Alisa Williams
+                        Sharath Shetty
                       </p>
                       <p className="text-xs text-gray-500 dark:text-neutral-400">
                         {/* Entrepreneur | Happy customer */}

@@ -22,7 +22,7 @@ export default function Footer() {
               Designed and developed by{" "}
               <a
                 className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400"
-                href="#"
+                href="https://ahmadmidlaj.netlify.app/"
               >
                 WebTech
               </a>{" "}
