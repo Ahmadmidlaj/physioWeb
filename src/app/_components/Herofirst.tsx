@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../components/ui/dialog";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { sendEmail } from "../../../utils/send-email";
 import { useForm } from "react-hook-form";
 import { Lottie } from "@/hooks/Lottie";
@@ -25,16 +25,33 @@ export type FormData = {
 export default function Herofirst() {
   const router = useRouter();
   const { register, handleSubmit } = useForm<FormData>();
+  const [isOther, setIsOther] = useState(false);
+  const [otherCity, setOtherCity] = useState("");
 
-  async function onSubmit(data: FormData) {
+ async function onSubmit(data: FormData) {
     try {
-      await sendEmail(data);
+      const formData = isOther ? { ...data, city: otherCity } : data;
+      await sendEmail(formData);
       router.push("/success"); // Navigate to the /success route upon successful submission
     } catch (error) {
       console.error("Error:", error);
       // Handle error if sending email fails
     }
   }
+  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCity = event.target.value;
+    setIsOther(selectedCity === "other");
+    setOtherCity("");
+  };
+  // async function onSubmit(data: FormData) {
+  //   try {
+  //     await sendEmail(data);
+  //     router.push("/success"); // Navigate to the /success route upon successful submission
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     // Handle error if sending email fails
+  //   }
+  // }
   return (
     <div>
       {/* <!-- Hero --> */}
@@ -125,6 +142,49 @@ export default function Herofirst() {
                                 />
                               </div>
                               <div className="mb-5">
+                        <label
+                          htmlFor="city"
+                          className="mb-3 block text-base font-medium text-gray-500"
+                        >
+                          Select City
+                        </label>
+                        <select
+                          id="city"
+                          className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md"
+                          {...register("city", { required: true })}
+                          onChange={handleCityChange}
+                        >
+                          <option value="">Select a city</option>
+                          <option value="Kankanady">Kankanady</option>
+                          <option value="Hampankatta">Hampankatta</option>
+                          <option value="Falnir">Falnir</option>
+                          <option value="Jeppu">Jeppu</option>
+                          <option value="StateBank">StateBank</option>
+                          <option value="Kavoor">Kavoor</option>
+                          <option value="Marnamikatta">Marnamikatta</option>
+                          <option value="Pandeshwar">Pandeshwar</option>
+                          <option value="ShakthiNagar">ShakthiNagar</option>
+                          <option value="Padil">Padil</option>
+                          <option value="Bikarnakatte">Bikarnakatte</option>
+                          <option value="Nanthoor">Nanthoor</option>
+                          <option value="KPT">KPT</option>
+                          <option value="Kadri">Kadri</option>
+                          <option value="BuntsHostel">BuntsHostel</option>
+                          <option value="Pumpwell">Pumpwell</option>
+                          <option value="Jyothi">Jyothi</option>
+                          <option value="other">Other</option>
+                        </select>
+                        {isOther && (
+                          <input
+                            type="text"
+                            placeholder="Enter your city"
+                            className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md mt-4"
+                            value={otherCity}
+                            onChange={(e) => setOtherCity(e.target.value)}
+                          />
+                        )}
+                      </div>
+                              {/* <div className="mb-5">
                                 <label
                                   htmlFor="city"
                                   className="mb-3 block text-base font-medium text-gray-500"
@@ -166,7 +226,7 @@ export default function Herofirst() {
                                   <option value="Pumpwell">Pumpwell</option>
                                   <option value="Jyothi">Jyothi</option>
                                 </select>
-                              </div>
+                              </div> */}
                               <div>
                                 <button className="hover:shadow-form rounded-md bg-purple-500 py-3 px-8 text-base font-semibold text-white outline-none">
                                   Submit
