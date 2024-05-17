@@ -47,7 +47,7 @@ export default function Contents() {
               </h1>
               <p className="mt-6 text-xl leading-8 text-gray-700">
                 Physiotherapy, also referred to as physical therapy, is an
-                allied health profession that makes use of bio-mechanics or
+                health profession that makes use of bio-mechanics or
                 kinesiology, manual therapy, exercise therapy, and
                 electrotherapy, to help patients restore, maintain and increase
                 their physical mobility, strength, and function.
