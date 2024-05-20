@@ -262,12 +262,20 @@ export default function Herofirst() {
             height={800}
             alt="hero image"
             /> */}
-            <Lottie
+            {/* <Lottie
               src={
                 // "https://lottie.host/d275ed70-8cce-446a-9522-681a5c4e4fbb/WMNyLoc54D.json"
                 " https://lottie.host/30f1bd96-0240-4af3-a1bf-7e8945128f4a/Z80Hye68ld.json"
               }
-            />
+            /> */}
+            <Image
+            src="/image/heroimage.jpeg"
+            width={550}
+            height={550}
+            alt=""          
+             />
+
+            
             {/* <Image
           src="/image/herophysio.jpeg"
           className="w-full rounded-md"

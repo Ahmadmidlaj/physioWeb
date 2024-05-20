@@ -260,7 +260,7 @@ export default function Navbar() {
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <Image src="/image/logo.png" alt="logo" height={250} width={200} />
+            <Image src="/image/updatedlogo.jpg" alt="logo" height={150} width={150} />
           </a>
         </div>
         <div className="flex lg:hidden">
