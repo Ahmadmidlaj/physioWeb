@@ -1,57 +1,10 @@
 "use client";
 
 import { Button } from "../../components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../../components/ui/dialog";
-import { FC, useState } from "react";
-import { sendEmail } from "../../../utils/send-email";
-import { useForm } from "react-hook-form";
-import { Lottie } from "@/hooks/Lottie";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
-export type FormData = {
-  name: string;
-  city: string;
-  phonenumber: number;
-};
+import Link from "next/link";
 
 export default function Herofirst() {
-  const router = useRouter();
-  const { register, handleSubmit } = useForm<FormData>();
-  const [isOther, setIsOther] = useState(false);
-  const [otherCity, setOtherCity] = useState("");
-
- async function onSubmit(data: FormData) {
-    try {
-      const formData = isOther ? { ...data, city: otherCity } : data;
-      await sendEmail(formData);
-      router.push("/success"); // Navigate to the /success route upon successful submission
-    } catch (error) {
-      console.error("Error:", error);
-      // Handle error if sending email fails
-    }
-  }
-  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedCity = event.target.value;
-    setIsOther(selectedCity === "other");
-    setOtherCity("");
-  };
-  // async function onSubmit(data: FormData) {
-  //   try {
-  //     await sendEmail(data);
-  //     router.push("/success"); // Navigate to the /success route upon successful submission
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     // Handle error if sending email fails
-  //   }
-  // }
   return (
     <div>
       {/* <!-- Hero --> */}
@@ -71,183 +24,15 @@ export default function Herofirst() {
             </p>
 
             {/* <!-- Buttons --> */}
-            <div className="mt-7 grid gap-3 w-full sm:inline-flex">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                    Book Now
-                    <svg
-                      className="flex-shrink-0 size-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="m9 18 6-6-6-6" />
-                    </svg>
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                  <DialogTitle>Book Your Home Visit</DialogTitle>
-
-                  <div>
-                    <div className="lg:max-w-lg lg:mx-auto lg:me-0 ms-auto">
-                      <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-lg dark:bg-neutral-900">
-                        {/* <div className="text-center">
-                          <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
-                            Book Your Home Visit
-                          </h1>
-                          <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400">
-                            Book your home visits using simple steps
-                          </p>
-                        </div> */}
-
-                        <div className="mt-5">
-                          <div className="grid grid-cols-1 gap-4">
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                              <div className="mb-5">
-                                <label
-                                  htmlFor="name"
-                                  className="mb-3 block text-base font-medium text-gray-500"
-                                >
-                                  Full Name
-                                </label>
-                                <input
-                                  type="text"
-                                  placeholder="Full Name"
-                                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md"
-                                  {...register("name", { required: true })}
-                                />
-                              </div>
-
-                              <div className="mb-5">
-                                <label
-                                  htmlFor="phonenumber"
-                                  className="mb-3 block text-base font-medium text-gray-500"
-                                >
-                                  Phone Number
-                                </label>
-                                <input
-                                  type="text"
-                                  placeholder="123456789"
-                                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md"
-                                  {...register("phonenumber", {
-                                    required: true,
-                                  })}
-                                />
-                              </div>
-                              <div className="mb-5">
-                        <label
-                          htmlFor="city"
-                          className="mb-3 block text-base font-medium text-gray-500"
-                        >
-                          Select City
-                        </label>
-                        <select
-                          id="city"
-                          className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md"
-                          {...register("city", { required: true })}
-                          onChange={handleCityChange}
-                        >
-                          <option value="">Select a city</option>
-                          <option value="Kankanady">Kankanady</option>
-                          <option value="Hampankatta">Hampankatta</option>
-                          <option value="Falnir">Falnir</option>
-                          <option value="Jeppu">Jeppu</option>
-                          <option value="StateBank">StateBank</option>
-                          <option value="Kavoor">Kavoor</option>
-                          <option value="Marnamikatta">Marnamikatta</option>
-                          <option value="Pandeshwar">Pandeshwar</option>
-                          <option value="ShakthiNagar">ShakthiNagar</option>
-                          <option value="Padil">Padil</option>
-                          <option value="Bikarnakatte">Bikarnakatte</option>
-                          <option value="Nanthoor">Nanthoor</option>
-                          <option value="KPT">KPT</option>
-                          <option value="Kadri">Kadri</option>
-                          <option value="BuntsHostel">BuntsHostel</option>
-                          <option value="Pumpwell">Pumpwell</option>
-                          <option value="Jyothi">Jyothi</option>
-                          <option value="other">Other</option>
-                        </select>
-                        {isOther && (
-                          <input
-                            type="text"
-                            placeholder="Enter your city"
-                            className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md mt-4"
-                            value={otherCity}
-                            onChange={(e) => setOtherCity(e.target.value)}
-                          />
-                        )}
-                      </div>
-                              {/* <div className="mb-5">
-                                <label
-                                  htmlFor="city"
-                                  className="mb-3 block text-base font-medium text-gray-500"
-                                >
-                                  Select City
-                                </label>
-                                <select
-                                  id="city"
-                                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-700 outline-none focus:border-purple-500 focus:shadow-md"
-                                  {...register("city", { required: true })}
-                                >
-                                 
-                                  <option value="">Select a city</option>
-                                  <option value="Kankanady">Kankanady</option>
-                                  <option value="Hampankatta">
-                                    Hampankatta
-                                  </option>
-                                  <option value="Falnir">Falnir</option>
-                                  <option value="Jeppu">Jeppu</option>
-                                  <option value="StateBank">StateBank</option>
-                                  <option value="Kavoor">Kavoor</option>
-                                  <option value="Marnamikatta">
-                                    Marnamikatta
-                                  </option>
-                                  <option value="Pandeshwar">Pandeshwar</option>
-                                  <option value="ShakthiNagar">
-                                    ShakthiNagar
-                                  </option>
-                                  <option value="Padil">Padil</option>
-                                  <option value="Bikarnakatte">
-                                    Bikarnakatte
-                                  </option>
-                                  <option value="Nanthoor">Nanthoor</option>
-                                  <option value="KPT">KPT</option>
-                                  <option value="Kadri">Kadri</option>
-                                  <option value="BuntsHostel">
-                                    BuntsHostel
-                                  </option>
-                                  <option value="Pumpwell">Pumpwell</option>
-                                  <option value="Jyothi">Jyothi</option>
-                                </select>
-                              </div> */}
-                              <div>
-                                <button className="hover:shadow-form rounded-md bg-purple-500 py-3 px-8 text-base font-semibold text-white outline-none">
-                                  Submit
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
+            <div className="mt-7 flex flex-auto ml-auto space-x-center">
+              <Link href="#booking">
+                <Button className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                  Book Now
+                
+                </Button>
+              </Link>
             </div>
-            {/* <!-- End Buttons --> */}
-
-            {/* <!-- Review --> */}
-
-            {/* <!-- End Review --> */}
           </div>
-          {/* <!-- End Col --> */}
 
           <div className="relative ms-4">
             {/* <img
@@ -269,13 +54,12 @@ export default function Herofirst() {
               }
             /> */}
             <Image
-            src="/image/heroimage.jpeg"
-            width={550}
-            height={550}
-            alt=""          
-             />
+              src="/image/heroimage.jpeg"
+              width={550}
+              height={550}
+              alt=""
+            />
 
-            
             {/* <Image
           src="/image/herophysio.jpeg"
           className="w-full rounded-md"
