@@ -18,10 +18,12 @@ export default function Aurora() {
         className="relative flex flex-col gap-4 items-center justify-center px-4"
       >
         <div className="text-3xl md:text-7xl font-bold dark:text-white text-center">
-         Premier Physiotherapy Home Visit  Service in and around <br/> Mangaluru!
+
+         Premier Physiotherapy Home Visit  Service in Manglore & Bangalore!
         </div>
         <div className=" font-extralight text-base md:text-4xl dark:text-neutral-200 py-4 sm:text-6xl text-center">
-        Take Charge of Your Health Before It&apos;s Too Late. Experience the Ultimate Care with Our Premier Physiotherapy Home Visit Service in and around <br/> Mangaluru!
+        Take Charge of Your Health Before It&apos;s Too Late. Experience the Ultimate Care with Our Premier Physiotherapy Home Visit Service in Mangalore & Bangalore!
+
         </div>
         <a href="#booking">
         <button  className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2">
