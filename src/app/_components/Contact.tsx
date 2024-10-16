@@ -52,8 +52,8 @@ export default function Contact() {
                   </svg>
 
                   <div className="grow">
-                    <p className="text-sm text-gray-600 dark:text-neutral-400">
-                      Kankanady
+                    <p className="mt-1 text-black not-italic dark:text-white">
+                      Bangalore
                     </p>
                     <address className="mt-1 text-black not-italic dark:text-white">
                       {/* 300 Bath Street, Tay House <br/>
