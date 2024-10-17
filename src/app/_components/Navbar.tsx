@@ -96,7 +96,7 @@ export default function Navbar() {
                         <a>Blog</a>
                     </Link>
                 </li>
-                {/* Add more links as needed */}
+                {/* www.google.com */}
             </ul>
         </nav>
     );
