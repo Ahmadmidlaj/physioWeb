@@ -90,7 +90,7 @@ export default function Navbar() {
                 <a href="#contact" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" onClick={handleNavClick}>
                   Contact
                 </a>
-                <a href="#contact" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" onClick={handleNavClick}>
+                <a href="#src/app/blogs" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" onClick={handleNavClick}>
                   Blogs  
                 </a>
               </div>
