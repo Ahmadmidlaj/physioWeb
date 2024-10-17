@@ -44,7 +44,7 @@ export default function Navbar() {
           <a href="#content" className="text-sm font-semibold leading-6 text-gray-900">
             PhysioTherapy
           </a>
-          <a href="#src/app/blogs" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="#blogs" className="text-sm font-semibold leading-6 text-gray-900">
             Blogs
             </a>
           <a href="#contact" className="text-sm font-semibold leading-6 text-gray-900">
