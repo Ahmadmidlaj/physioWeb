@@ -1,25 +1,23 @@
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const posts = [
-    { title: 'First Post', content: 'This is the content of my first post.' },
-    { title: 'Second Post', content: 'This is the content of my second post.' },
+    { id: 1, title: 'First Post', content: 'This is the content of my first post.' },
+    { id: 2, title: 'Second Post', content: 'This is the content of my second post.' },
 ];
 
-export default function Post() {
-    const router = useRouter();
-    const { id } = router.query;
-
-    const post = posts[id];
-
-    if (!post) return <div>Loading...</div>;
-
+export default function Blog() {
     return (
         <div>
-            <h1>{post.title}</h1>
-            <p>{post.content}</p>
-            <Link href="/posts">
-                <a>Back to posts</a>
-            </Link>
+            <h1>My Blog</h1>
+            {posts.map((post) => (
+                <div key={post.id}>
+                    <h2>{post.title}</h2>
+                    <p>{post.content}</p>
+                    <Link href={`/blog/${post.id}`}>
+                        <a>Read more...</a>
+                    </Link>
+                </div>
+            ))}
         </div>
     );
 }
