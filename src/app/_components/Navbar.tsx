@@ -45,6 +45,9 @@ export default function Navbar() {
             PhysioTherapy
           </a>
           <a href="#contact" className="text-sm font-semibold leading-6 text-gray-900">
+            Blogs
+            </a>
+          <a href="#contact" className="text-sm font-semibold leading-6 text-gray-900">
             Contact
           </a>
         </Popover.Group>
