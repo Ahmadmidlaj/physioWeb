@@ -92,9 +92,15 @@ export default function Navbar() {
                 </a>
                 <a href="#contact" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" onClick={handleNavClick}>
                   Contact
-                </a>
-                <a href="#src/app/blogs" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" onClick={handleNavClick}>
-                  Blogs  
+                    <Link href="/blog">
+                        <a>Blog</a>
+                    </Link>
+                </li>
+                {/* Add more links as needed */}
+            </ul>
+        </nav>
+    );
+};  
                 </a>
               </div>
               <div className="py-6">
