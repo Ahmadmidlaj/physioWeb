@@ -1,24 +1,12 @@
-import Link from 'next/link';
-
-const posts = [
-    { id: 1, title: 'First Post', content: 'This is the content of my first post.' },
-    { id: 2, title: 'Second Post', content: 'This is the content of my second post.' },
-];
-
-export default function Blog() {
-    return (
-        <div>
-            <h1>My Blog</h1>
-            {posts.map((post) => (
-                <div key={post.id}>
-                    <h2>{post.title}</h2>
-                    <p>{post.content}</p>
-                    <Link href={`/blog/${post.id}`}>
-                        <a>Read more...</a>
-                    </Link>
-                </div>
-            ))}
-        </div>
-    );
+import Contents from "./_components/Contents";
+import Footer from "./_components/Footer";
+import Contact from "./_components/Contact";
+export default function Home() {
+  return (
+    <div>
+      <Navbar />
+      <Contact/>
+      <Footer />
+    </div>
+  );
 }
-
