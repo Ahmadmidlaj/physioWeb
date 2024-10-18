@@ -1,4 +1,4 @@
-// pages/about.js
+// page/blog.js
 
 import Contents from "./_components/Contents";
 
