@@ -1,9 +1,4 @@
-// pages/about.js
-
-import Head from 'next/head';
-
-const About = () => {
-  return (
+ <header className="bg-white sticky top-0 z-10">
     <>
       <Head>
         <title>About Us</title>
