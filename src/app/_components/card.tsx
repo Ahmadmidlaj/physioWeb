@@ -1,5 +1,3 @@
-// components/Card.js
-
 const Card = ({ title, content }) => {
   return (
     <div style={{
