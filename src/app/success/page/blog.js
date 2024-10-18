@@ -1,6 +1,6 @@
 // pages/about.js
 
-import Head from 'next/head';
+import Contents from "./_components/Contents";
 
 const About = () => {
   return (
