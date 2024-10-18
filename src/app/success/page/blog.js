@@ -2,11 +2,11 @@
 
 import Contents from "./_components/Contents";
 
-const About = () => {
+const blog = () => {
   return (
     <>
       <Head>
-        <title>About Us</title>
+        <title>blog</title>
         <meta name="description" content="Learn more about us." />
       </Head>
       <div>
@@ -17,4 +17,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default blog;
