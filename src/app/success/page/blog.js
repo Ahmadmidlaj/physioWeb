@@ -1,23 +1,20 @@
-import Link from 'next/link';
+// pages/about.js
 
-const posts = [
-    { id: 1, title: 'First Post', content: 'This is the content of my first post.' },
-];
+import Head from 'next/head';
 
-export default function Blog() {
-    return (
-        <div>
-            <h1>My Blog</h1>
-            {posts.map((post) => (
-                <div key={post.id}>
-                    <h2>{post.title}</h2>
-                    <p>{post.content}</p>
-                    <Link href={`/blog/${post.id}`}>
-                        <a>Read more...</a>
-                    </Link>
-                </div>
-            ))}
-        </div>
-    );
-}
+const About = () => {
+  return (
+    <>
+      <Head>
+        <title>About Us</title>
+        <meta name="description" content="Learn more about us." />
+      </Head>
+      <div>
+        <h1>About Us</h1>
+        <p>Welcome to our about page! We are dedicated to providing the best service.</p>
+      </div>
+    </>
+  );
+};
 
+export default About;
