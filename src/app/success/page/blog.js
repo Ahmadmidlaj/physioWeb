@@ -1,4 +1,4 @@
-// page/blog.js
+// page.tsx/blog.js
 
 import Contents from "./_components/Contents";
 
