@@ -47,4 +47,12 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
+ {
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}
+ 
 }
